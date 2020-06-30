@@ -1,0 +1,19 @@
+#credit to https://github.com/Derrick-Sherrill/DerrickSherrill.com/blob/master/MergeExcel.py
+
+import os
+import glob
+import pandas as pd
+#set working directory
+os.chdir("/folder/path/")
+
+#find all excel files in the folder
+#use glob pattern matching -> extension = 'xlsx'
+#save result in list -> all_filenames
+extension = 'xlsx'
+all_filenames = [i for i in glob.glob('*.{}'.format(extension))]
+#print(all_filenames)
+
+#combine all files in the list
+combined_excel = pd.concat([pd.read_excel(f) for f in all_filenames ])
+#export to excel
+combined_excel.to_excel( "/folder/path/filename.xlsx", index=False, encoding='utf-8-sig')
